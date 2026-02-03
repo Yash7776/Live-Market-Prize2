@@ -182,3 +182,28 @@
 [I 260203 16:09:44 consumers:369] Subscribed to tokens: ['3045'] on exchangeType 1
 [I 260203 16:09:44 consumers:393] Added 1 new symbols to indicator monitoring: ['3045']
 [I 260203 16:09:44 consumers:137] Indicator monitor thread started
+[I 260203 16:12:44 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:12:58 consumers:371] Subscribed to tokens: ['3045'] on exchangeType 1
+[I 260203 16:12:58 consumers:395] Added 1 new symbols to indicator monitoring: ['3045']
+[I 260203 16:12:58 consumers:139] Indicator monitor thread started
+[I 260203 16:13:42 consumers:619] Fetching historical candles with params: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 09:00', 'todate': '2026-01-28 15:30'}
+[I 260203 16:13:42 consumers:626] Historical data fetched - 50 candles
+[I 260203 16:13:42 strategies:47] ADX Signal: {'action': 'BUY', 'reason': '+DI 25.24 > 20 (strong uptrend)', 'confidence': 'high'}
+[I 260203 16:13:42 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 2.8855 > 0 (bullish)'}
+[I 260203 16:13:42 consumers:687] Strategy check for 3045: ADX={'action': 'BUY', 'reason': '+DI 25.24 > 20 (strong uptrend)', 'confidence': 'high'}, MACD={'action': 'BUY', 'reason': 'MACD line 2.8855 > 0 (bullish)'}, CurrentSide=NONE
+[I 260203 16:13:42 consumers:754] Opened LONG SBIN-EQ @ 1062.65 | Lots=1 | Qty=50 | Target=1078.59 | SL=1052.02
+[I 260203 16:30:15 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:31:10 consumers:343] Subscribed to tokens: ['3045'] on exchangeType 1
+[I 260203 16:31:10 consumers:773] Position CLOSED | Token=3045 | Exit price=1064.20 | Exit time=2026-02-03 11:01:10.237911+00:00 | Qty=50 | MTM=77.50 | Reason=Stoploss hit
+[I 260203 16:31:10 connection:153] AUTO EXIT | Stoploss hit | SBIN-EQ (3045) | Price=1064.20
+[W 260203 16:31:35 smartWebSocketV2:318] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 260203 16:31:35 smartConnect:124] in pool
+[I 260203 16:31:44 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:31:45 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:31:50 consumers:343] Subscribed to tokens: ['3045'] on exchangeType 1
+[W 260203 16:34:11 smartWebSocketV2:318] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 260203 16:34:11 smartConnect:124] in pool
+[I 260203 16:34:17 consumers:302] [AUTO MONITOR] Started for static tokens
+[I 260203 16:34:17 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:34:18 smartConnect:124] in pool
+[I 260203 16:35:10 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions

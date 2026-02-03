@@ -36,6 +36,8 @@ EXCHANGE_MAP = {
 
 class MarketConsumer(WebsocketConsumer):
 
+    MONITORED_TOKENS = ["3045", "1594","10666","11536","2031"]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.timeloop = Timeloop()
@@ -274,60 +276,30 @@ class MarketConsumer(WebsocketConsumer):
             logger.error(f"Live indicators processing failed for {symbol_token}: {e}", exc_info=True)
     
     def start_strategy_monitor(self):
-    # Prevent multiple starts
         if hasattr(self, '_timeloop_started') and self._timeloop_started:
-            logger.debug("Strategy monitor already started - skipping")
             return
 
-        # ────────────────────────────────────────────────
-        # The periodic function — registered with decorator
-        # ────────────────────────────────────────────────
+        # If no symbols from frontend yet, use static list
+        if not self.monitor_symbols:
+            self.monitor_symbols = self.MONITORED_TOKENS[:]
+            logger.info(f"[AUTO MONITOR] Using static list: {self.monitor_symbols}")
+
         @self.timeloop.job(interval=timedelta(minutes=2))
         def strategy_tick():
-            # Early exit if market is closed
-            if not self.is_market_hours():
-                # Optional: log only once per hour or something to avoid spam
-                # logger.debug("Market closed → skipping strategy cycle")
-                return
+            # if not self.is_market_hours():
+            #     return
 
-            # Safety checks
-            if not self.smart_api:
-                logger.warning("No smart_api instance available - skipping cycle")
-                return
+            logger.info(f"[AUTO CYCLE] Checking {len(self.monitor_symbols)} static tokens")
 
-            if not self.monitor_symbols:
-                logger.debug("No symbols being monitored - skipping cycle")
-                return
-
-            now_str = datetime.now().strftime("%H:%M:%S")
-            logger.info(f"[STRATEGY CYCLE] Starting | {len(self.monitor_symbols)} symbols | {now_str}")
-
-            # Process limited number of symbols per cycle (rate limit safety)
-            processed = 0
-            for token in self.monitor_symbols:
-                if processed >= 3:  # ← adjust this limit as needed
-                    break
+            for token in self.monitor_symbols[:4]:  # rate limit safety
                 try:
                     self.send_current_indicators(token)
-                    processed += 1
                 except Exception as e:
-                    logger.error(f"Strategy/indicators failed for token {token}: {str(e)}")
+                    logger.error(f"Auto cycle failed for {token}: {e}")
 
-            logger.debug(f"[STRATEGY CYCLE] Completed | Processed {processed} symbols")
-
-        # ────────────────────────────────────────────────
-        # Actually start the timeloop runner
-        # ────────────────────────────────────────────────
-        try:
-            self.timeloop.start(block=False)  # non-blocking — very important in Channels/Async context
-            self._timeloop_started = True
-            logger.info(
-                "[TIMELOOP STARTED] Strategy monitor active — "
-                "checking every 2 minutes during market hours"
-            )
-        except Exception as e:
-            logger.error(f"Failed to start timeloop: {str(e)}", exc_info=True)
-            self._timeloop_started = False
+        self.timeloop.start(block=False)
+        self._timeloop_started = True
+        logger.info("[AUTO MONITOR] Started for static tokens")
 
     def handle_subscribe(self, tradingsymbols, exchange):
         """
