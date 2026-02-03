@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Market</title>
+</head>
+<body>
+
+<div id="subscriptions">
+    <!-- Dynamic subscriptions will be added here -->
+</div>
+
+<hr>
+
+<h3>Subscribe to Symbol</h3>
+<input id="tradingsymbol" placeholder="Enter tradingsymbol e.g. NIFTY or SBIN-EQ">
+<select id="exchange">
+    <option value="NSE">NSE</option>
+    <option value="NFO">NFO</option>
+    <option value="BSE">BSE</option>
+    <option value="MCX">MCX</option>
+    <option value="NCO">NCO</option>
+    <!-- Add more as needed -->
+</select>
+<button onclick="subscribeSymbol()">Subscribe</button>
+
+<h3>Unsubscribe from Symbol</h3>
+<input id="unsub_tradingsymbol" placeholder="Enter tradingsymbol e.g. NIFTY">
+<select id="unsub_exchange">
+    <option value="NSE">NSE</option>
+    <option value="NFO">NFO</option>
+    <option value="BSE">BSE</option>
+    <option value="MCX">MCX</option>
+    <option value="NCO">NCO</option>
+    <!-- Add more as needed -->
+</select>
+<button onclick="unsubscribeSymbol()">Unsubscribe</button>
+
+<h3>Get 15 min Historical for SBI</h3>
+<button onclick="testHistorical()">Get Historical</button>
+
+<div id="indicators">
+    <h3>Live Indicators</h3>
+    <div id="indicator-list"></div>
+</div>
+
+<div id="strategy-signals">
+    <h3>Latest Strategy Signals</h3>
+    <p id="signal-text">No signal yet</p>
+    <p id="position-text">Current Position: NONE</p>
+</div>
+
+
+<h3>Test Orders (Use Small Qty & Safe Prices!)</h3>
+
+<button onclick="testPlaceOrder()">Place Test LIMIT BUY (SBIN-EQ, 1 qty @100)</button>
+<br><br>
+<input id="orderId" placeholder="Paste orderid here" style="width:300px;">
+<button onclick="testModifyOrder()">Modify Price to 150</button>
+<button onclick="testCancelOrder()">Cancel Order</button>
+<button onclick="testGetOrder()">Get Order Details</button>
+
+<script>
+const socket = new WebSocket("ws://127.0.0.1:8000/ws/market/");
+
+socket.onmessage = function(e) {
+    let data;
+    try {
+        data = JSON.parse(e.data);
+        console.log("Full WS message:", data);  // Keep this for debug
+    } catch (err) {
+        console.error("Invalid JSON received:", e.data);
+        return;
+    }
+    if (data.status === "live_indicators_update") {
+        const container = document.getElementById('indicator-list');
+        const sym = data.symbol || data.symboltoken;
+        const existing = document.getElementById(`ind-${data.symboltoken}`);
+
+        const html = `
+            <div id="ind-${data.symboltoken}" style="margin:8px 0; padding:8px; border:1px solid #ddd;">
+                <strong>${sym}</strong> @ ${data.latest_close || '--'}  (${data.timestamp.split('T')[1].slice(0,8)})
+                <br>
+                RSI(14): ${data.rsi_14 ?? '—'}  
+                | MACD: ${data.macd?.line ?? '—'}  (sig: ${data.macd?.signal ?? '—'})  hist: ${data.macd?.histogram ?? '—'}
+                <br>
+                ADX: ${data.adx?.adx ?? '—'}   +DI: ${data.adx?.di_plus ?? '—'}   -DI: ${data.adx?.di_minus ?? '—'}
+            </div>
+        `;
+
+        if (existing) {
+            existing.outerHTML = html;
+        } else {
+            container.insertAdjacentHTML('beforeend', html);
+        }
+    }
+
+    if (data.symbol) {
+        const spanId = data.symbol.toLowerCase().replace('-', '');
+        const span = document.getElementById(spanId);
+        if (span) {
+            span.innerText = data.ltp || '--';
+        }
+    }
+    else if (data.status === "strategy_signal") {
+        const sig = data.signal;
+        document.getElementById('signal-text').innerText = 
+            `${sig.action} - ${sig.reason} (Confidence: ${sig.confidence || 'medium'})`;
+        document.getElementById('position-text').innerText = 
+            `Current Position: ${data.current_position?.side || 'NONE'}`;
+        
+        // Optional alert
+        alert(`Strategy Alert!\n${sig.action}: ${sig.reason}`);
+    } 
+    else if (data.status) {
+        console.log("Status:", data.status);
+        if (data.status === "order_placed") {
+            alert("Order placed successfully!\nOrder ID: " + (data.orderid || "unknown"));
+        }
+    } 
+    else if (data.error) {
+        console.error("Error:", data.error);
+        let msg = data.error;
+        if (msg.includes("exceeding access rate")) {
+            msg = "Rate limit reached! Wait 1–2 minutes and try again.";
+        }
+        alert("Error: " + msg);
+    }
+};
+const symbolDivs = {};  // Track added symbols to avoid duplicates
+
+function addSymbolDiv(symbol) {
+    if (!symbolDivs[symbol]) {
+        const div = document.createElement('div');
+        const spanId = symbol.toLowerCase().replace('-', '');
+        div.innerHTML = `${symbol}: <span id="${spanId}">--</span>`;
+        document.getElementById('subscriptions').appendChild(div);
+        symbolDivs[symbol] = true;
+    }
+}
+
+function subscribeSymbol() {
+    const ts = document.getElementById('tradingsymbol').value.trim();
+    const ex = document.getElementById('exchange').value;
+
+    if (ts) {
+        socket.send(JSON.stringify({
+            "action": "subscribe",
+            "tradingsymbols": [ts],
+            "exchange": ex
+        }));
+
+        // Add div preemptively
+        addSymbolDiv(ts);
+    }
+}
+
+function unsubscribeSymbol() {
+    const ts = document.getElementById('unsub_tradingsymbol').value.trim();
+    const ex = document.getElementById('unsub_exchange').value;
+
+    if (ts) {
+        socket.send(JSON.stringify({
+            "action": "unsubscribe",
+            "tradingsymbols": [ts],
+            "exchange": ex
+        }));
+
+        // Optionally remove div from page (commented out for now)
+        // const spanId = ts.toLowerCase().replace('-', '');
+        // const div = document.getElementById(spanId).parentNode;
+        // div.remove();
+        // delete symbolDivs[ts];
+    }
+}
+
+// Optionally subscribe to defaults on connect
+socket.onopen = function() {
+    // subscribeSymbol() for defaults if needed, but manual for user-friendly
+};
+</script>
+
+<script>
+function testPlaceOrder() {
+    socket.send(JSON.stringify({
+        "action": "place_order",
+        "params": {
+            "variety": "NORMAL",
+            "tradingsymbol": "SBIN-EQ",
+            "symboltoken": "3045",
+            "transactiontype": "BUY",
+            "exchange": "NSE",
+            "ordertype": "LIMIT",
+            "producttype": "INTRADAY",
+            "duration": "DAY",
+            "price": "100",
+            "quantity": "1",
+            "squareoff": "0",
+            "stoploss": "0"
+        }
+    }));
+}
+
+function testModifyOrder() {
+    const oid = document.getElementById('orderId').value.trim();
+    if (!oid) return alert("Paste orderid first!");
+    socket.send(JSON.stringify({
+        "action": "modify_order",
+        "params": {
+            "orderid": oid,
+            "price": "150"
+        }
+    }));
+}
+
+function testCancelOrder() {
+    const oid = document.getElementById('orderId').value.trim();
+    if (!oid) return alert("Paste orderid first!");
+    socket.send(JSON.stringify({
+        "action": "cancel_order",
+        "params": {
+            "orderid": oid,
+            "variety": "NORMAL"
+        }
+    }));
+}
+
+function testGetOrder() {
+    const oid = document.getElementById('orderId').value.trim();
+    if (!oid) return alert("Paste orderid first!");
+    socket.send(JSON.stringify({
+        "action": "get_order",
+        "params": {
+            "orderid": oid
+        }
+    }));
+}
+</script>
+
+<script>
+
+function testHistorical() {
+    // Disable button temporarily to avoid spam
+    const btn = document.querySelector('button[onclick="testHistorical()"]');
+    btn.disabled = true;
+    btn.innerText = "Waiting... (rate limit)";
+
+    // Wait 5 seconds before sending
+    setTimeout(() => {
+        socket.send(JSON.stringify({
+            "action": "get_historical",
+            "params": {
+                "symboltoken": "3045",
+                "exchange": "NSE",
+                "interval": "FIFTEEN_MINUTE",
+                "from_date": "2026-01-25 09:00",
+                "to_date": "2026-01-28 15:30"
+            }
+        }));
+
+        // Re-enable button after 10 seconds (safe)
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.innerText = "Get Historical";
+        }, 10000);
+    }, 5000);
+}
+</script>
+
+</body>
+</html>
