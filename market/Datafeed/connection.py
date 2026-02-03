@@ -38,6 +38,7 @@ def setup_connection(consumer):
         consumer.feed_token = consumer.smart_api.getfeedToken()
 
         logger.info(f"Login SUCCESS - Auth Token: {consumer.auth_token[:20]}... | Feed Token: {consumer.feed_token[:20]}...")
+        consumer.start_strategy_monitor()
         consumer.send(json.dumps({
             "status": "Login Successful",
             "login_status": "SUCCESS",

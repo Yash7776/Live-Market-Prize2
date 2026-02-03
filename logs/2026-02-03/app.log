@@ -175,3 +175,10 @@
 [I 260203 15:07:39 consumers:122] Indicator monitor thread started
 [E 260203 15:09:11 consumers:183] Live indicators fetch failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
 [E 260203 15:09:11 consumers:183] Live indicators fetch failed: Couldn't parse the JSON response received from the server: b'Access denied because of exceeding access rate'
+[E 260203 15:57:35 connection:193] Critical error in connection setup: Timeloop.job() got an unexpected keyword argument 'when'
+[E 260203 15:57:42 connection:193] Critical error in connection setup: Timeloop.job() got an unexpected keyword argument 'when'
+[E 260203 16:01:06 connection:193] Critical error in connection setup: Timeloop.job() got an unexpected keyword argument 'target'
+[I 260203 16:09:08 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:09:44 consumers:369] Subscribed to tokens: ['3045'] on exchangeType 1
+[I 260203 16:09:44 consumers:393] Added 1 new symbols to indicator monitoring: ['3045']
+[I 260203 16:09:44 consumers:137] Indicator monitor thread started

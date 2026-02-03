@@ -17,7 +17,10 @@ from ..Strategies.strategies import check_adx_strategy, check_macd_strategy
 from ..models import Position
 import time
 from datetime import datetime, timedelta
-
+from timeloop import Timeloop
+from datetime import datetime, time
+import time as t                 # ← alias for the module
+from datetime import datetime, timedelta, time as dt_time
 # Official exchangeType mapping from SmartAPI SDK source
 EXCHANGE_MAP = {
     "NSE": 1,
@@ -35,6 +38,10 @@ class MarketConsumer(WebsocketConsumer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.timeloop = Timeloop()
+        self.strategy_job = None
+        self._timeloop_started = False
+
 
     def connect(self):
         self.accept()
@@ -55,6 +62,16 @@ class MarketConsumer(WebsocketConsumer):
 
     def start_smartapi(self):
         threading.Thread(target=setup_connection, args=(self,), daemon=True).start()
+
+
+    def is_market_hours(self):
+        now = datetime.now()
+        start_time = time(9, 15)
+        end_time = time(15, 30)
+        return (
+            start_time <= now.time() <= end_time and
+            now.weekday() < 5  # Monday=0 ... Friday=4
+        )
 
     def receive(self, text_data):
         try:
@@ -107,7 +124,7 @@ class MarketConsumer(WebsocketConsumer):
         def refresh_loop():
             while True:
                 if not self.monitor_symbols:
-                    time.sleep(30)
+                    t.sleep(30)
                     continue
 
                 for token in self.monitor_symbols[:5]:  # limit to avoid rate limits
@@ -115,7 +132,7 @@ class MarketConsumer(WebsocketConsumer):
                         self.send_current_indicators(token)
                     except Exception as e:
                         logger.error(f"Indicator refresh failed for {token}: {e}")
-                time.sleep(45)  # ~every 45 seconds – adjust based on Angel rate limits
+                t.sleep(45)  # ~every 45 seconds – adjust based on Angel rate limits
 
         self.indicator_refresh_task = threading.Thread(target=refresh_loop, daemon=True)
         self.indicator_refresh_task.start()
@@ -123,15 +140,33 @@ class MarketConsumer(WebsocketConsumer):
 
     # New helper: fetch recent candles + calc indicators + send to frontend
     def send_current_indicators(self, symbol_token):
+        """
+        Fetch recent candles, calculate indicators, check current position,
+        run strategy logic, and push update to frontend.
+        Called periodically by background task.
+        """
         if not self.smart_api:
+            logger.warning("No smart_api instance - skipping indicators")
             return
 
-        # Example: last 100 candles of 15-min (adjust as needed)
-        to_date   = datetime.now().strftime("%Y-%m-%d %H:%M")
-        from_date = (datetime.now() - timedelta(days=10)).strftime("%Y-%m-%d %H:%M")  # enough for indicators
+        if not self.is_market_hours():  # ← assumes you added this helper method
+            logger.debug(f"Market closed - skipping indicators for {symbol_token}")
+            return
+
+        # Make exchange dynamic (fallback to NSE)
+        exchange = "NSE"
+        symbol_name = self.token_symbol_map.get(symbol_token, "UNKNOWN")
+        if symbol_name.endswith("-EQ"):
+            exchange = "NSE"
+        # You can add more logic later for NFO, MCX, etc.
+
+        # Time range: last ~10 days should be enough for 14-period indicators
+        now = datetime.now()
+        to_date   = now.strftime("%Y-%m-%d %H:%M")
+        from_date = (now - timedelta(days=10)).strftime("%Y-%m-%d %H:%M")
 
         params = {
-            "exchange": "NSE",              # ← make dynamic later
+            "exchange": exchange,
             "symboltoken": symbol_token,
             "interval": "FIFTEEN_MINUTE",
             "fromdate": from_date,
@@ -139,31 +174,83 @@ class MarketConsumer(WebsocketConsumer):
         }
 
         try:
-            candle_data = self.smart_api.getCandleData(params)
-            if not candle_data or candle_data.get('status') != True or not candle_data.get('data'):
+            logger.debug(f"[CANDLE FETCH] Requesting {symbol_name} ({symbol_token}) 15-min candles")
+            candle_response = self.smart_api.getCandleData(params)
+
+            if not candle_response:
+                logger.warning(f"getCandleData returned None for {symbol_token}")
                 return
 
-            candles = candle_data["data"][-100:]  # last 100 candles max
-
-            if len(candles) < 50:  # arbitrary minimum for meaningful indicators
+            if candle_response.get('status') != True:
+                msg = candle_response.get('message', 'Unknown error')
+                logger.error(f"getCandleData failed: {msg} | token={symbol_token}")
                 return
 
-            closes = [c[4] for c in candles]
-            highs  = [c[2] for c in candles]
-            lows   = [c[3] for c in candles]
+            candles = candle_response.get('data', [])
+            if not candles:
+                logger.info(f"No candles returned for {symbol_token}")
+                return
 
-            rsi = calculate_rsi(closes)
+            # Take last N candles (enough for indicators + buffer)
+            candles = candles[-120:]   # ~30 hours of 15-min candles
+
+            if len(candles) < 50:
+                logger.info(f"Not enough candles ({len(candles)}) for {symbol_token} → skipping indicators")
+                return
+
+            closes = [float(c[4]) for c in candles]
+            highs  = [float(c[2]) for c in candles]
+            lows   = [float(c[3]) for c in candles]
+
+            rsi         = calculate_rsi(closes)
             macd_line, macd_signal, macd_hist = calculate_macd(closes)
             adx, di_plus, di_minus = calculate_adx(highs, lows, closes)
 
             latest_close = closes[-1] if closes else None
 
+            # ────────────────────────────────────────────────
+            # Get current position status (for strategy context)
+            # ────────────────────────────────────────────────
+            open_pos = self.get_open_position_for_token(symbol_token)
+            current_side = open_pos.side if open_pos else "NONE"
+
+            # ────────────────────────────────────────────────
+            # Run strategy checks (same as in historical handler)
+            # ────────────────────────────────────────────────
+            adx_info = {
+                "adx": adx,
+                "di_plus": di_plus,
+                "di_minus": di_minus
+            }
+            macd_info = {
+                "line": macd_line,
+                "signal": macd_signal,
+                "histogram": macd_hist
+            }
+
+            adx_signal  = check_adx_strategy(adx_info, current_side)
+            macd_signal = check_macd_strategy(macd_info, current_side)
+
+            # Log strategy outcome (very useful for debugging)
+            logger.info(
+                f"[STRATEGY] {symbol_name} | Side={current_side} | "
+                f"ADX signal={adx_signal.get('action') if adx_signal else 'None'} | "
+                f"MACD signal={macd_signal.get('action') if macd_signal else 'None'}"
+            )
+
+            # Execute any signals that appeared
+            for sig in [s for s in [adx_signal, macd_signal] if s]:
+                self.handle_strategy_signal(symbol_token, sig, latest_close=latest_close)
+
+            # ────────────────────────────────────────────────
+            # Build payload for frontend
+            # ────────────────────────────────────────────────
             payload = {
                 "status": "live_indicators_update",
                 "symboltoken": symbol_token,
-                "symbol": self.token_symbol_map.get(symbol_token, "UNKNOWN"),
-                "latest_close": round(latest_close, 2) if latest_close else None,
-                "timestamp": datetime.now().isoformat(),
+                "symbol": symbol_name,
+                "latest_close": round(latest_close, 2) if latest_close is not None else None,
+                "timestamp": now.isoformat(),
                 "rsi_14": round(rsi, 2) if rsi is not None else None,
                 "macd": {
                     "line": round(macd_line, 4) if macd_line is not None else None,
@@ -174,13 +261,73 @@ class MarketConsumer(WebsocketConsumer):
                     "adx": round(adx, 2) if adx is not None else None,
                     "di_plus": round(di_plus, 2) if di_plus is not None else None,
                     "di_minus": round(di_minus, 2) if di_minus is not None else None
-                }
+                },
+                # Bonus: send current position side & strategy signals
+                "current_side": current_side,
+                "strategy_signals": [s for s in [adx_signal, macd_signal] if s]
             }
 
             self.send(json.dumps(payload))
+            logger.debug(f"[IND UPDATE SENT] {symbol_name}")
 
         except Exception as e:
-            logger.error(f"Live indicators fetch failed: {e}")
+            logger.error(f"Live indicators processing failed for {symbol_token}: {e}", exc_info=True)
+    
+    def start_strategy_monitor(self):
+    # Prevent multiple starts
+        if hasattr(self, '_timeloop_started') and self._timeloop_started:
+            logger.debug("Strategy monitor already started - skipping")
+            return
+
+        # ────────────────────────────────────────────────
+        # The periodic function — registered with decorator
+        # ────────────────────────────────────────────────
+        @self.timeloop.job(interval=timedelta(minutes=2))
+        def strategy_tick():
+            # Early exit if market is closed
+            if not self.is_market_hours():
+                # Optional: log only once per hour or something to avoid spam
+                # logger.debug("Market closed → skipping strategy cycle")
+                return
+
+            # Safety checks
+            if not self.smart_api:
+                logger.warning("No smart_api instance available - skipping cycle")
+                return
+
+            if not self.monitor_symbols:
+                logger.debug("No symbols being monitored - skipping cycle")
+                return
+
+            now_str = datetime.now().strftime("%H:%M:%S")
+            logger.info(f"[STRATEGY CYCLE] Starting | {len(self.monitor_symbols)} symbols | {now_str}")
+
+            # Process limited number of symbols per cycle (rate limit safety)
+            processed = 0
+            for token in self.monitor_symbols:
+                if processed >= 3:  # ← adjust this limit as needed
+                    break
+                try:
+                    self.send_current_indicators(token)
+                    processed += 1
+                except Exception as e:
+                    logger.error(f"Strategy/indicators failed for token {token}: {str(e)}")
+
+            logger.debug(f"[STRATEGY CYCLE] Completed | Processed {processed} symbols")
+
+        # ────────────────────────────────────────────────
+        # Actually start the timeloop runner
+        # ────────────────────────────────────────────────
+        try:
+            self.timeloop.start(block=False)  # non-blocking — very important in Channels/Async context
+            self._timeloop_started = True
+            logger.info(
+                "[TIMELOOP STARTED] Strategy monitor active — "
+                "checking every 2 minutes during market hours"
+            )
+        except Exception as e:
+            logger.error(f"Failed to start timeloop: {str(e)}", exc_info=True)
+            self._timeloop_started = False
 
     def handle_subscribe(self, tradingsymbols, exchange):
         """
