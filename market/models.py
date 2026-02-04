@@ -19,6 +19,14 @@ class Position(models.Model):
     status = models.CharField(max_length=20, default="OPEN")  # OPEN, CLOSED, SQUARED_OFF
     
     # ── NEW FIELDS ──
+    side = models.CharField(
+        max_length=10,
+        choices=[('LONG', 'Long'), ('SHORT', 'Short')],
+        default='LONG',
+        verbose_name="Position Side",
+        help_text="LONG or SHORT position"
+    )
+    
     lots = models.PositiveIntegerField(
         default=1,
         verbose_name="Number of Lots",

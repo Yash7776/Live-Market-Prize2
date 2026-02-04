@@ -1,0 +1,564 @@
+[I 260204 09:42:32 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 09:44:27 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 09:44:28 strategies:47] ADX Signal: None
+[I 260204 09:44:28 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 6.7098 > 0 (bullish)'}
+[I 260204 09:44:28 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=None | MACD signal=BUY
+[I 260204 09:44:28 consumers:726] Opened LONG SBIN-EQ @ 1067.80 | Lots=1 | Qty=50 | Target=1083.82 | SL=1057.12
+[E 260204 09:44:28 consumers:276] Live indicators processing failed for 3045: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 09:44:28 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 66.84 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 09:44:28 strategies:77] MACD Signal: {'action': 'SELL', 'reason': 'MACD line -12.8482 < 0 (bearish)'}
+[I 260204 09:44:28 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=SELL
+[I 260204 09:44:28 consumers:726] Opened SHORT EURINR26FEB109.75CE @ 1560.30 | Lots=1 | Qty=50 | Target=1536.90 | SL=1575.90
+[E 260204 09:44:28 consumers:276] Live indicators processing failed for 1594: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 09:44:29 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 27.09 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 09:44:29 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3180 > 0 (bullish)'}
+[I 260204 09:44:29 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 09:44:29 consumers:726] Opened SHORT PNB-EQ @ 123.33 | Lots=1 | Qty=50 | Target=121.48 | SL=124.56
+[E 260204 09:44:29 consumers:276] Live indicators processing failed for 10666: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 09:44:29 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 67.48 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 09:44:29 strategies:77] MACD Signal: {'action': 'SELL', 'reason': 'MACD line -16.6446 < 0 (bearish)'}
+[I 260204 09:44:29 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=SELL
+[I 260204 09:44:29 consumers:726] Opened SHORT 668GS204026FEB94PE @ 3062.10 | Lots=1 | Qty=50 | Target=3016.17 | SL=3092.72
+[E 260204 09:44:29 consumers:276] Live indicators processing failed for 11536: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 09:46:29 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 09:46:30 consumers:276] Live indicators processing failed for 3045: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:46:30 consumers:276] Live indicators processing failed for 1594: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:46:31 consumers:276] Live indicators processing failed for 10666: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:46:32 consumers:276] Live indicators processing failed for 11536: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[I 260204 09:48:32 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 09:48:32 consumers:276] Live indicators processing failed for 3045: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:48:33 consumers:276] Live indicators processing failed for 1594: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:48:33 consumers:276] Live indicators processing failed for 10666: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:48:34 consumers:276] Live indicators processing failed for 11536: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[I 260204 09:50:34 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 09:50:34 consumers:276] Live indicators processing failed for 3045: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:50:35 consumers:276] Live indicators processing failed for 1594: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:50:36 consumers:276] Live indicators processing failed for 10666: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:50:36 consumers:276] Live indicators processing failed for 11536: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 217, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[I 260204 09:56:56 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 09:57:21 consumers:298] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 09:57:21 consumers:282] Live indicators processing failed for 3045: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 222, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:57:22 consumers:282] Live indicators processing failed for 1594: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 222, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:57:22 consumers:282] Live indicators processing failed for 10666: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 222, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[E 260204 09:57:23 consumers:282] Live indicators processing failed for 11536: 'Position' object has no attribute 'side'
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 222, in send_current_indicators
+        current_side = open_pos.side if open_pos else "NONE"
+                       ^^^^^^^^^^^^^
+    AttributeError: 'Position' object has no attribute 'side'
+[I 260204 10:02:39 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 10:04:33 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:04:34 strategies:47] ADX Signal: None
+[I 260204 10:04:34 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 6.7074 > 0 (bullish)'}
+[I 260204 10:04:34 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=None | MACD signal=BUY
+[I 260204 10:04:34 consumers:727] Opened LONG SBIN-EQ @ 1071.20 | Lots=1 | Qty=50 | Target=1087.27 | SL=1060.49
+[E 260204 10:04:34 consumers:276] Live indicators processing failed for 3045: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 10:04:34 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 66.78 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:04:34 strategies:77] MACD Signal: {'action': 'SELL', 'reason': 'MACD line -22.0581 < 0 (bearish)'}
+[I 260204 10:04:34 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=SELL
+[I 260204 10:04:34 consumers:727] Opened SHORT EURINR26FEB109.75CE @ 1554.50 | Lots=1 | Qty=50 | Target=1531.18 | SL=1570.05
+[E 260204 10:04:34 consumers:276] Live indicators processing failed for 1594: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 10:04:35 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.66 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:04:35 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.2891 > 0 (bullish)'}
+[I 260204 10:04:35 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:04:35 consumers:727] Opened SHORT PNB-EQ @ 123.74 | Lots=1 | Qty=50 | Target=121.88 | SL=124.98
+[E 260204 10:04:35 consumers:276] Live indicators processing failed for 10666: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 10:04:36 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 65.42 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:04:36 strategies:77] MACD Signal: {'action': 'SELL', 'reason': 'MACD line -31.5669 < 0 (bearish)'}
+[I 260204 10:04:36 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=SELL
+[I 260204 10:04:36 consumers:727] Opened SHORT 668GS204026FEB94PE @ 3054.80 | Lots=1 | Qty=50 | Target=3008.98 | SL=3085.35
+[E 260204 10:04:36 consumers:276] Live indicators processing failed for 11536: type dict doesn't define __round__ method
+    Traceback (most recent call last):
+      File "C:\Users\Admin\Downloads\Live-Market-Prize\market\WebSocketUtility\consumers.py", line 259, in send_current_indicators
+        "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                  ~~~~~^^^^^^^^^^^^^^^^
+    TypeError: type dict doesn't define __round__ method
+[I 260204 10:07:18 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 10:08:28 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:08:29 strategies:47] ADX Signal: None
+[I 260204 10:08:29 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 6.7632 > 0 (bullish)'}
+[I 260204 10:08:29 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=None | MACD signal=BUY
+[I 260204 10:08:29 consumers:727] Opened LONG SBIN-EQ @ 1071.90 | Lots=1 | Qty=50 | Target=1087.98 | SL=1061.18
+[I 260204 10:08:29 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 66.63 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:08:29 strategies:77] MACD Signal: {'action': 'SELL', 'reason': 'MACD line -21.9943 < 0 (bearish)'}
+[I 260204 10:08:29 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=SELL
+[I 260204 10:08:29 consumers:727] Opened SHORT EURINR26FEB109.75CE @ 1555.30 | Lots=1 | Qty=50 | Target=1531.97 | SL=1570.85
+[I 260204 10:08:30 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.44 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:08:30 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.2915 > 0 (bullish)'}
+[I 260204 10:08:30 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:08:30 consumers:727] Opened SHORT PNB-EQ @ 123.77 | Lots=1 | Qty=50 | Target=121.91 | SL=125.01
+[I 260204 10:08:31 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 64.82 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:08:31 strategies:77] MACD Signal: {'action': 'SELL', 'reason': 'MACD line -31.4312 < 0 (bearish)'}
+[I 260204 10:08:31 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=SELL
+[I 260204 10:08:31 consumers:727] Opened SHORT 668GS204026FEB94PE @ 3056.50 | Lots=1 | Qty=50 | Target=3010.65 | SL=3087.07
+[I 260204 10:12:46 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[E 260204 10:12:46 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:46 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:12:47 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:47 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:12:47 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:47 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:12:48 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:48 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:12:49 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:12:49 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:49 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:12:50 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:50 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:12:50 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:50 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:12:51 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:51 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:12:52 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:12:56 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:56 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:12:56 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:56 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:12:57 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:57 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:12:57 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:57 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:12:58 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:12:59 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:59 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:12:59 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:12', 'todate': '2026-02-04 10:12'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:12:59 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[I 260204 10:13:00 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:00 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3051 > 0 (bullish)'}
+[I 260204 10:13:00 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:00 consumers:727] Opened SHORT PNB-EQ @ 123.94 | Lots=1 | Qty=50 | Target=122.08 | SL=125.18
+[I 260204 10:13:01 strategies:47] ADX Signal: None
+[I 260204 10:13:01 strategies:77] MACD Signal: None
+[I 260204 10:13:01 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:02 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:02 strategies:47] ADX Signal: None
+[I 260204 10:13:02 strategies:77] MACD Signal: None
+[I 260204 10:13:02 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:03 strategies:47] ADX Signal: None
+[I 260204 10:13:03 strategies:77] MACD Signal: None
+[I 260204 10:13:03 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:03 strategies:47] ADX Signal: None
+[I 260204 10:13:03 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:03 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:03 consumers:774] Position CLOSED | Token=10666 | Exit price=123.95 | Exit time=2026-02-04 04:43:03.968594+00:00 | Qty=50 | MTM=0.50 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:04 strategies:47] ADX Signal: None
+[I 260204 10:13:04 strategies:77] MACD Signal: None
+[I 260204 10:13:04 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:05 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:06 strategies:47] ADX Signal: None
+[I 260204 10:13:06 strategies:77] MACD Signal: None
+[I 260204 10:13:06 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:06 strategies:47] ADX Signal: None
+[I 260204 10:13:06 strategies:77] MACD Signal: None
+[I 260204 10:13:06 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:07 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:07 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3051 > 0 (bullish)'}
+[I 260204 10:13:07 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:07 consumers:727] Opened SHORT PNB-EQ @ 123.94 | Lots=1 | Qty=50 | Target=122.08 | SL=125.18
+[I 260204 10:13:07 strategies:47] ADX Signal: None
+[I 260204 10:13:07 strategies:77] MACD Signal: None
+[I 260204 10:13:07 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:08 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:09 strategies:47] ADX Signal: None
+[I 260204 10:13:09 strategies:77] MACD Signal: None
+[I 260204 10:13:09 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:10 strategies:47] ADX Signal: None
+[I 260204 10:13:10 strategies:77] MACD Signal: None
+[I 260204 10:13:10 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:11 strategies:47] ADX Signal: None
+[I 260204 10:13:11 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:11 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:11 consumers:774] Position CLOSED | Token=10666 | Exit price=123.95 | Exit time=2026-02-04 04:43:11.303016+00:00 | Qty=50 | MTM=0.50 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:11 strategies:47] ADX Signal: None
+[I 260204 10:13:11 strategies:77] MACD Signal: None
+[I 260204 10:13:11 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:12 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:13 strategies:47] ADX Signal: None
+[I 260204 10:13:13 strategies:77] MACD Signal: None
+[I 260204 10:13:13 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:13 strategies:47] ADX Signal: None
+[I 260204 10:13:13 strategies:77] MACD Signal: None
+[I 260204 10:13:13 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:14 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:14 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3059 > 0 (bullish)'}
+[I 260204 10:13:14 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:14 consumers:727] Opened SHORT PNB-EQ @ 123.95 | Lots=1 | Qty=50 | Target=122.09 | SL=125.19
+[I 260204 10:13:14 strategies:47] ADX Signal: None
+[I 260204 10:13:14 strategies:77] MACD Signal: None
+[I 260204 10:13:14 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:16 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:16 strategies:47] ADX Signal: None
+[I 260204 10:13:16 strategies:77] MACD Signal: None
+[I 260204 10:13:16 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:17 strategies:47] ADX Signal: None
+[I 260204 10:13:17 strategies:77] MACD Signal: None
+[I 260204 10:13:17 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:17 strategies:47] ADX Signal: None
+[I 260204 10:13:17 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:17 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:17 consumers:774] Position CLOSED | Token=10666 | Exit price=123.91 | Exit time=2026-02-04 04:43:17.656408+00:00 | Qty=50 | MTM=2.00 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:18 strategies:47] ADX Signal: None
+[I 260204 10:13:18 strategies:77] MACD Signal: None
+[I 260204 10:13:18 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:19 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:19 strategies:47] ADX Signal: None
+[I 260204 10:13:19 strategies:77] MACD Signal: None
+[I 260204 10:13:19 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:20 strategies:47] ADX Signal: None
+[I 260204 10:13:20 strategies:77] MACD Signal: None
+[I 260204 10:13:20 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:20 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:20 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3027 > 0 (bullish)'}
+[I 260204 10:13:20 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:20 consumers:727] Opened SHORT PNB-EQ @ 123.91 | Lots=1 | Qty=50 | Target=122.05 | SL=125.15
+[I 260204 10:13:21 strategies:47] ADX Signal: None
+[I 260204 10:13:21 strategies:77] MACD Signal: None
+[I 260204 10:13:21 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:22 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:22 strategies:47] ADX Signal: None
+[I 260204 10:13:22 strategies:77] MACD Signal: None
+[I 260204 10:13:22 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:23 strategies:47] ADX Signal: None
+[I 260204 10:13:23 strategies:77] MACD Signal: None
+[I 260204 10:13:23 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:23 strategies:47] ADX Signal: None
+[I 260204 10:13:23 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:23 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:23 consumers:774] Position CLOSED | Token=10666 | Exit price=123.91 | Exit time=2026-02-04 04:43:23.935583+00:00 | Qty=50 | MTM=0.00 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:24 strategies:47] ADX Signal: None
+[I 260204 10:13:24 strategies:77] MACD Signal: None
+[I 260204 10:13:24 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:25 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:26 strategies:47] ADX Signal: None
+[I 260204 10:13:26 strategies:77] MACD Signal: None
+[I 260204 10:13:26 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:26 strategies:47] ADX Signal: None
+[I 260204 10:13:26 strategies:77] MACD Signal: None
+[I 260204 10:13:26 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:27 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:27 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3027 > 0 (bullish)'}
+[I 260204 10:13:27 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:27 consumers:727] Opened SHORT PNB-EQ @ 123.91 | Lots=1 | Qty=50 | Target=122.05 | SL=125.15
+[I 260204 10:13:27 strategies:47] ADX Signal: None
+[I 260204 10:13:27 strategies:77] MACD Signal: None
+[I 260204 10:13:27 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:28 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:29 strategies:47] ADX Signal: None
+[I 260204 10:13:29 strategies:77] MACD Signal: None
+[I 260204 10:13:29 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:29 strategies:47] ADX Signal: None
+[I 260204 10:13:29 strategies:77] MACD Signal: None
+[I 260204 10:13:29 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:30 strategies:47] ADX Signal: None
+[I 260204 10:13:30 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:30 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:30 consumers:774] Position CLOSED | Token=10666 | Exit price=123.94 | Exit time=2026-02-04 04:43:30.324224+00:00 | Qty=50 | MTM=1.50 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:30 strategies:47] ADX Signal: None
+[I 260204 10:13:30 strategies:77] MACD Signal: None
+[I 260204 10:13:30 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:31 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:32 strategies:47] ADX Signal: None
+[I 260204 10:13:32 strategies:77] MACD Signal: None
+[I 260204 10:13:32 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:32 strategies:47] ADX Signal: None
+[I 260204 10:13:32 strategies:77] MACD Signal: None
+[I 260204 10:13:32 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:33 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:33 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3051 > 0 (bullish)'}
+[I 260204 10:13:33 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:33 consumers:727] Opened SHORT PNB-EQ @ 123.94 | Lots=1 | Qty=50 | Target=122.08 | SL=125.18
+[I 260204 10:13:34 strategies:47] ADX Signal: None
+[I 260204 10:13:34 strategies:77] MACD Signal: None
+[I 260204 10:13:34 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:35 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:35 strategies:47] ADX Signal: None
+[I 260204 10:13:35 strategies:77] MACD Signal: None
+[I 260204 10:13:35 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:36 strategies:47] ADX Signal: None
+[I 260204 10:13:36 strategies:77] MACD Signal: None
+[I 260204 10:13:36 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:36 strategies:47] ADX Signal: None
+[I 260204 10:13:36 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:36 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:36 consumers:774] Position CLOSED | Token=10666 | Exit price=123.89 | Exit time=2026-02-04 04:43:36.664889+00:00 | Qty=50 | MTM=2.50 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:37 strategies:47] ADX Signal: None
+[I 260204 10:13:37 strategies:77] MACD Signal: None
+[I 260204 10:13:37 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:38 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:38 strategies:47] ADX Signal: None
+[I 260204 10:13:38 strategies:77] MACD Signal: None
+[I 260204 10:13:38 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:39 strategies:47] ADX Signal: None
+[I 260204 10:13:39 strategies:77] MACD Signal: None
+[I 260204 10:13:39 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:39 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:39 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3027 > 0 (bullish)'}
+[I 260204 10:13:39 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:39 consumers:727] Opened SHORT PNB-EQ @ 123.91 | Lots=1 | Qty=50 | Target=122.05 | SL=125.15
+[I 260204 10:13:40 strategies:47] ADX Signal: None
+[I 260204 10:13:40 strategies:77] MACD Signal: None
+[I 260204 10:13:40 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:41 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:41 strategies:47] ADX Signal: None
+[I 260204 10:13:41 strategies:77] MACD Signal: None
+[I 260204 10:13:41 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:42 strategies:47] ADX Signal: None
+[I 260204 10:13:42 strategies:77] MACD Signal: None
+[I 260204 10:13:42 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:42 strategies:47] ADX Signal: None
+[I 260204 10:13:42 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:13:42 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:13:42 consumers:774] Position CLOSED | Token=10666 | Exit price=123.91 | Exit time=2026-02-04 04:43:42.961508+00:00 | Qty=50 | MTM=0.00 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:13:43 strategies:47] ADX Signal: None
+[I 260204 10:13:43 strategies:77] MACD Signal: None
+[I 260204 10:13:43 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:44 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:45 strategies:47] ADX Signal: None
+[I 260204 10:13:45 strategies:77] MACD Signal: None
+[I 260204 10:13:45 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:45 strategies:47] ADX Signal: None
+[I 260204 10:13:45 strategies:77] MACD Signal: None
+[I 260204 10:13:45 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:46 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 23.01 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:13:46 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.3027 > 0 (bullish)'}
+[I 260204 10:13:46 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:13:46 consumers:727] Opened SHORT PNB-EQ @ 123.91 | Lots=1 | Qty=50 | Target=122.05 | SL=125.15
+[I 260204 10:13:46 strategies:47] ADX Signal: None
+[I 260204 10:13:46 strategies:77] MACD Signal: None
+[I 260204 10:13:46 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:13:47 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:13:48 strategies:47] ADX Signal: None
+[I 260204 10:13:48 strategies:77] MACD Signal: None
+[I 260204 10:13:48 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:13:48 strategies:47] ADX Signal: None
+[I 260204 10:13:48 strategies:77] MACD Signal: None
+[I 260204 10:13:48 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[E 260204 10:13:49 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:49 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:13:49 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:49 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:13:50 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:13:51 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:51 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:13:51 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:51 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:13:52 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:52 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:13:52 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:52 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:13:53 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:13:54 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:54 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:13:55 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:55 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:13:55 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:55 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:13:56 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:56 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:13:57 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:13:57 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:57 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:13:58 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:58 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:13:58 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:58 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:13:59 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:13', 'todate': '2026-02-04 10:13'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:13:59 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:14:00 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:14:00 strategies:47] ADX Signal: None
+[I 260204 10:14:00 strategies:77] MACD Signal: None
+[I 260204 10:14:00 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:14:01 strategies:47] ADX Signal: None
+[I 260204 10:14:01 strategies:77] MACD Signal: None
+[I 260204 10:14:01 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:14:02 strategies:47] ADX Signal: None
+[I 260204 10:14:02 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:14:02 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:14:02 consumers:774] Position CLOSED | Token=10666 | Exit price=123.90 | Exit time=2026-02-04 04:44:02.509860+00:00 | Qty=50 | MTM=0.50 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:14:43 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 10:15:08 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260204 10:15:09 strategies:47] ADX Signal: None
+[I 260204 10:15:09 strategies:77] MACD Signal: None
+[I 260204 10:15:09 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:15:09 strategies:47] ADX Signal: None
+[I 260204 10:15:09 strategies:77] MACD Signal: None
+[I 260204 10:15:09 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:15:10 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 22.33 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:15:10 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 0.2869 > 0 (bullish)'}
+[I 260204 10:15:10 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:15:10 consumers:727] Opened SHORT PNB-EQ @ 123.86 | Lots=1 | Qty=50 | Target=122.00 | SL=125.10
+[I 260204 10:15:10 strategies:47] ADX Signal: None
+[I 260204 10:15:10 strategies:77] MACD Signal: None
+[I 260204 10:15:10 consumers:237] [STRATEGY] UNKNOWN | Side=SHORT | ADX signal=None | MACD signal=None
+[I 260204 10:15:40 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[E 260204 10:15:41 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:15', 'todate': '2026-02-04 10:15'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:15:41 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:15:41 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '1594', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:15', 'todate': '2026-02-04 10:15'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:15:41 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=1594
+[E 260204 10:15:42 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '10666', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:15', 'todate': '2026-02-04 10:15'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:15:42 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=10666
+[E 260204 10:15:43 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '11536', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:15', 'todate': '2026-02-04 10:15'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:15:43 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=11536
+[I 260204 10:16:44 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 10:17:08 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[I 260204 10:17:09 strategies:47] ADX Signal: None
+[I 260204 10:17:09 strategies:77] MACD Signal: None
+[I 260204 10:17:09 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:17:10 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 33.68 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:17:10 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 72.5575 > 0 (bullish)'}
+[I 260204 10:17:10 consumers:237] [STRATEGY] UNKNOWN | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:17:10 consumers:727] Opened SHORT Nifty 50 @ 25780.05 | Lots=1 | Qty=50 | Target=25393.35 | SL=26037.85
+[I 260204 10:17:40 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[I 260204 10:17:40 strategies:47] ADX Signal: None
+[I 260204 10:17:40 strategies:77] MACD Signal: None
+[I 260204 10:17:40 consumers:237] [STRATEGY] UNKNOWN | Side=LONG | ADX signal=None | MACD signal=None
+[E 260204 10:17:41 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '99926000', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:17', 'todate': '2026-02-04 10:17'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:17:41 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=99926000
+[I 260204 10:19:22 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 10:20:28 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260204 10:20:36 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[I 260204 10:20:37 strategies:47] ADX Signal: {'action': 'BUY', 'reason': '+DI 20.69 > 20 (strong uptrend)', 'confidence': 'high'}
+[I 260204 10:20:37 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 6.7896 > 0 (bullish)'}
+[I 260204 10:20:37 consumers:237] [STRATEGY]  | Side=NONE | ADX signal=BUY | MACD signal=BUY
+[I 260204 10:20:37 consumers:727] Opened LONG SBIN-EQ @ 1073.20 | Lots=1 | Qty=50 | Target=1089.30 | SL=1062.47
+[I 260204 10:20:37 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 34.68 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:20:37 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 71.4167 > 0 (bullish)'}
+[I 260204 10:20:37 consumers:237] [STRATEGY]  | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:20:37 consumers:727] Opened SHORT Nifty 50 @ 25765.75 | Lots=1 | Qty=50 | Target=25379.26 | SL=26023.41
+[I 260204 10:21:07 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[I 260204 10:21:08 strategies:47] ADX Signal: None
+[I 260204 10:21:08 strategies:77] MACD Signal: None
+[I 260204 10:21:08 consumers:237] [STRATEGY]  | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:21:08 strategies:47] ADX Signal: None
+[I 260204 10:21:08 strategies:77] MACD Signal: {'action': 'EXIT', 'reason': 'MACD line crossed above 0 (bullish crossover)'}
+[I 260204 10:21:08 consumers:237] [STRATEGY]  | Side=SHORT | ADX signal=None | MACD signal=EXIT
+[I 260204 10:21:08 consumers:774] Position CLOSED | Token=99926000 | Exit price=25763.45 | Exit time=2026-02-04 04:51:08.944028+00:00 | Qty=50 | MTM=115.00 | Reason=MACD line crossed above 0 (bullish crossover)
+[I 260204 10:21:38 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[E 260204 10:21:39 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:21', 'todate': '2026-02-04 10:21'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:21:39 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=3045
+[E 260204 10:21:40 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '99926000', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:21', 'todate': '2026-02-04 10:21'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:21:40 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=99926000
+[I 260204 10:22:10 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[I 260204 10:22:10 strategies:47] ADX Signal: None
+[I 260204 10:22:10 strategies:77] MACD Signal: None
+[I 260204 10:22:10 consumers:237] [STRATEGY]  | Side=LONG | ADX signal=None | MACD signal=None
+[I 260204 10:22:11 strategies:47] ADX Signal: {'action': 'SELL', 'reason': '-DI 34.83 > 20 (strong downtrend)', 'confidence': 'high'}
+[I 260204 10:22:11 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 70.5751 > 0 (bullish)'}
+[I 260204 10:22:11 consumers:237] [STRATEGY]  | Side=NONE | ADX signal=SELL | MACD signal=BUY
+[I 260204 10:22:11 consumers:727] Opened SHORT Nifty 50 @ 25755.20 | Lots=1 | Qty=50 | Target=25368.87 | SL=26012.75
+[I 260204 10:22:41 consumers:292] [AUTO CYCLE] Checking 2 static tokens
+[I 260204 10:22:41 strategies:47] ADX Signal: None
+[I 260204 10:22:41 strategies:77] MACD Signal: None
+[I 260204 10:22:41 consumers:237] [STRATEGY]  | Side=LONG | ADX signal=None | MACD signal=None
+[E 260204 10:22:42 smartConnect:246] Error occurred while making a POST request to https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData. Error: Something Went Wrong, Please Try After Sometime. URL: https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData, Headers: {'Content-type': 'application/json', 'X-ClientLocalIP': '127.0.0.1', 'X-ClientPublicIP': '106.193.147.98', 'X-MACAddress': '30:de:4b:37:38:d7', 'Accept': 'application/json', 'X-PrivateKey': 'iARx2hbi', 'X-UserType': 'USER', 'X-SourceID': 'WEB'}, Request: {'exchange': 'NSE', 'symboltoken': '99926000', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 10:22', 'todate': '2026-02-04 10:22'}, Response: {'message': 'Something Went Wrong, Please Try After Sometime', 'errorcode': 'AB1004', 'status': False, 'data': None}
+[E 260204 10:22:42 consumers:188] getCandleData failed: Something Went Wrong, Please Try After Sometime | token=99926000

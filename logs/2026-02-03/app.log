@@ -207,3 +207,70 @@
 [I 260203 16:34:17 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
 [I 260203 16:34:18 smartConnect:124] in pool
 [I 260203 16:35:10 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:38:08 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 16:40:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:42:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:44:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:46:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:48:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:50:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:52:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:54:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:56:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 16:58:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:00:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:02:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:03:18 consumers:591] Fetching historical candles with params: {'exchange': 'NSE', 'symboltoken': '3045', 'interval': 'FIFTEEN_MINUTE', 'fromdate': '2026-01-25 09:00', 'todate': '2026-01-28 15:30'}
+[I 260203 17:03:18 consumers:598] Historical data fetched - 50 candles
+[I 260203 17:03:18 strategies:47] ADX Signal: {'action': 'BUY', 'reason': '+DI 25.24 > 20 (strong uptrend)', 'confidence': 'high'}
+[I 260203 17:03:18 strategies:77] MACD Signal: {'action': 'BUY', 'reason': 'MACD line 2.8855 > 0 (bullish)'}
+[I 260203 17:03:18 consumers:659] Strategy check for 3045: ADX={'action': 'BUY', 'reason': '+DI 25.24 > 20 (strong uptrend)', 'confidence': 'high'}, MACD={'action': 'BUY', 'reason': 'MACD line 2.8855 > 0 (bullish)'}, CurrentSide=NONE
+[I 260203 17:03:18 consumers:726] Opened LONG SBIN-EQ @ 1062.65 | Lots=1 | Qty=50 | Target=1078.59 | SL=1052.02
+[I 260203 17:04:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:06:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:08:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:10:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:12:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:14:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:16:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:18:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:20:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:22:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:24:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:26:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:28:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:30:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:32:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:34:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:36:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:38:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:40:03 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:40:32 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 17:42:27 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:44:27 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:46:28 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:48:28 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:50:28 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:52:28 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:55:14 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 17:57:05 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 17:59:05 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:01:05 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:12:26 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 18:14:17 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:16:17 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:18:17 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:20:17 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:29:29 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 18:33:51 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 18:33:56 consumers:314] [AUTO CYCLE] Checking 5 tokens
+[I 260203 18:34:06 consumers:314] [AUTO CYCLE] Checking 5 tokens
+[I 260203 18:34:16 consumers:314] [AUTO CYCLE] Checking 5 tokens
+[I 260203 18:35:27 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 18:35:53 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:36:23 consumers:292] [AUTO CYCLE] Checking 5 static tokens
+[I 260203 18:37:13 connection:76] SmartAPI WebSocket Opened - Ready for subscriptions
+[I 260203 18:37:18 consumers:314] [AUTO CYCLE] Checking 1 tokens
+[I 260203 18:37:28 consumers:314] [AUTO CYCLE] Checking 1 tokens
+[I 260203 18:37:38 consumers:314] [AUTO CYCLE] Checking 1 tokens
+[I 260203 18:37:48 consumers:314] [AUTO CYCLE] Checking 1 tokens

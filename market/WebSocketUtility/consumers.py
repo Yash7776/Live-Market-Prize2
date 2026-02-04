@@ -36,7 +36,7 @@ EXCHANGE_MAP = {
 
 class MarketConsumer(WebsocketConsumer):
 
-    MONITORED_TOKENS = ["3045", "1594","10666","11536","2031"]
+    MONITORED_TOKENS = ["3045", "99926000"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -114,7 +114,7 @@ class MarketConsumer(WebsocketConsumer):
                 self.handle_get_historical(params)
 
             else:
-                self.send(json.dumps({"error": f"Unknown action: {action}"}))
+                self.send(json.dumps({"error": f"action: {action}"}))
 
         except Exception as e:
             self.send(json.dumps({"error": str(e)}))
@@ -157,7 +157,7 @@ class MarketConsumer(WebsocketConsumer):
 
         # Make exchange dynamic (fallback to NSE)
         exchange = "NSE"
-        symbol_name = self.token_symbol_map.get(symbol_token, "UNKNOWN")
+        symbol_name = self.token_symbol_map.get(symbol_token, "")
         if symbol_name.endswith("-EQ"):
             exchange = "NSE"
         # You can add more logic later for NFO, MCX, etc.
@@ -184,7 +184,7 @@ class MarketConsumer(WebsocketConsumer):
                 return
 
             if candle_response.get('status') != True:
-                msg = candle_response.get('message', 'Unknown error')
+                msg = candle_response.get('message', 'error')
                 logger.error(f"getCandleData failed: {msg} | token={symbol_token}")
                 return
 
@@ -205,7 +205,7 @@ class MarketConsumer(WebsocketConsumer):
             lows   = [float(c[3]) for c in candles]
 
             rsi         = calculate_rsi(closes)
-            macd_line, macd_signal, macd_hist = calculate_macd(closes)
+            macd_line, macd_signal_value, macd_hist = calculate_macd(closes)
             adx, di_plus, di_minus = calculate_adx(highs, lows, closes)
 
             latest_close = closes[-1] if closes else None
@@ -226,7 +226,7 @@ class MarketConsumer(WebsocketConsumer):
             }
             macd_info = {
                 "line": macd_line,
-                "signal": macd_signal,
+                "signal": macd_signal_value,
                 "histogram": macd_hist
             }
 
@@ -256,7 +256,7 @@ class MarketConsumer(WebsocketConsumer):
                 "rsi_14": round(rsi, 2) if rsi is not None else None,
                 "macd": {
                     "line": round(macd_line, 4) if macd_line is not None else None,
-                    "signal": round(macd_signal, 4) if macd_signal is not None else None,
+                    "signal": round(macd_signal_value, 4) if macd_signal_value is not None else None,
                     "histogram": round(macd_hist, 4) if macd_hist is not None else None
                 },
                 "adx": {
@@ -284,7 +284,7 @@ class MarketConsumer(WebsocketConsumer):
             self.monitor_symbols = self.MONITORED_TOKENS[:]
             logger.info(f"[AUTO MONITOR] Using static list: {self.monitor_symbols}")
 
-        @self.timeloop.job(interval=timedelta(minutes=2))
+        @self.timeloop.job(interval=timedelta(seconds=30))
         def strategy_tick():
             # if not self.is_market_hours():
             #     return
@@ -717,6 +717,7 @@ class MarketConsumer(WebsocketConsumer):
                 stoploss    = round(stoploss, 2),
                 mtm         = 0.0,
                 status      = "OPEN",
+                side        = side,  # Save the side (LONG/SHORT)
                 
                 # NEW: save lots & quantity
                 lots        = lots,
