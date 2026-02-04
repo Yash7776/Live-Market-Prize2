@@ -50,12 +50,19 @@ def setup_connection(consumer):
         if response.status_code == 200:
             consumer.instrument_list = response.json()
             consumer.token_to_symbol = {}
+            consumer.token_exchange_map = {}  # NEW: Add this line
+
             for instr in consumer.instrument_list:
                 token = instr.get("token")
-                ts = instr.get("symbol")  # this is "SBIN-EQ", "NIFTY50", etc.
+                ts = instr.get("symbol")
+                exchange = instr.get("exch_seg")  # NEW: Get exchange
                 if token and ts:
                     consumer.token_to_symbol[token] = ts
+                if token and exchange:  # NEW: Store exchange mapping
+                    consumer.token_exchange_map[token] = exchange
+
             logger.info(f"Created token-to-symbol map with {len(consumer.token_to_symbol)} entries")
+            logger.info(f"Created token-to-exchange map with {len(consumer.token_exchange_map)} entries")  # NEW
             logger.info(f"Instrument list fetched - {len(consumer.instrument_list)} entries")
         else:
             logger.error("Failed to fetch instrument list")

@@ -21,6 +21,7 @@ from timeloop import Timeloop
 from datetime import datetime, time
 import time as t                 # ← alias for the module
 from datetime import datetime, timedelta, time as dt_time
+
 # Official exchangeType mapping from SmartAPI SDK source
 EXCHANGE_MAP = {
     "NSE": 1,
@@ -33,6 +34,9 @@ EXCHANGE_MAP = {
     "CDS": 13,
 }
 
+# Reverse mapping for exchange codes
+EXCHANGE_CODE_MAP = {v: k for k, v in EXCHANGE_MAP.items()}
+
 
 class MarketConsumer(WebsocketConsumer):
 
@@ -43,6 +47,8 @@ class MarketConsumer(WebsocketConsumer):
         self.timeloop = Timeloop()
         self.strategy_job = None
         self._timeloop_started = False
+        # Add token-to-exchange mapping
+        self.token_exchange_map = {}  # token -> exchange (NSE, NFO, etc.)
 
 
     def connect(self):
@@ -51,6 +57,7 @@ class MarketConsumer(WebsocketConsumer):
 
         self.subscribed_tokens = {}          # exchangeType: set(tokens)
         self.token_symbol_map = {}           # token: symbol (tradingsymbol)
+        self.token_exchange_map = {}         # token -> exchange (NEW)
         self.smart_api = None
         self.sws = None
         self.instrument_list = None
@@ -65,6 +72,43 @@ class MarketConsumer(WebsocketConsumer):
     def start_smartapi(self):
         threading.Thread(target=setup_connection, args=(self,), daemon=True).start()
 
+    def build_token_exchange_mapping(self):
+        """Build mapping from token to exchange using instrument list"""
+        if not self.instrument_list:
+            logger.warning("Instrument list not available for building token-exchange mapping")
+            return
+        
+        self.token_exchange_map.clear()
+        for instr in self.instrument_list:
+            token = instr.get("token")
+            exchange = instr.get("exch_seg")
+            if token and exchange:
+                self.token_exchange_map[token] = exchange
+                # Also store symbol if available
+                symbol = instr.get("symbol")
+                if symbol and token not in self.token_symbol_map:
+                    self.token_symbol_map[token] = symbol
+        
+        logger.info(f"Built token-exchange map with {len(self.token_exchange_map)} entries")
+
+    def get_exchange_for_token(self, token):
+        """Get the exchange segment for a given token"""
+        # Try to get from our mapping first
+        if token in self.token_exchange_map:
+            return self.token_exchange_map[token]
+        
+        # Fallback: try to find in instrument list
+        if self.instrument_list:
+            for instr in self.instrument_list:
+                if str(instr.get("token")) == str(token):
+                    exchange = instr.get("exch_seg")
+                    if exchange:
+                        self.token_exchange_map[token] = exchange
+                        return exchange
+        
+        # Default fallback
+        logger.warning(f"Exchange not found for token {token}, defaulting to NSE")
+        return "NSE"
 
     def is_market_hours(self):
         now = datetime.now()
@@ -155,12 +199,11 @@ class MarketConsumer(WebsocketConsumer):
             logger.debug(f"Market closed - skipping indicators for {symbol_token}")
             return
 
-        # Make exchange dynamic (fallback to NSE)
-        exchange = "NSE"
-        symbol_name = self.token_symbol_map.get(symbol_token, "")
-        if symbol_name.endswith("-EQ"):
-            exchange = "NSE"
-        # You can add more logic later for NFO, MCX, etc.
+        # Get the correct exchange for this token
+        exchange = self.get_exchange_for_token(symbol_token)
+        symbol_name = self.token_symbol_map.get(symbol_token, symbol_token)
+        
+        logger.debug(f"[CANDLE FETCH] Requesting {symbol_name} ({symbol_token}) on exchange {exchange}")
 
         # Time range: last ~10 days should be enough for 14-period indicators
         now = datetime.now()
@@ -176,28 +219,28 @@ class MarketConsumer(WebsocketConsumer):
         }
 
         try:
-            logger.debug(f"[CANDLE FETCH] Requesting {symbol_name} ({symbol_token}) 15-min candles")
+            logger.debug(f"[CANDLE FETCH] Requesting {symbol_name} ({symbol_token}) 15-min candles on {exchange}")
             candle_response = self.smart_api.getCandleData(params)
 
             if not candle_response:
-                logger.warning(f"getCandleData returned None for {symbol_token}")
+                logger.warning(f"getCandleData returned None for {symbol_token} on {exchange}")
                 return
 
             if candle_response.get('status') != True:
                 msg = candle_response.get('message', 'error')
-                logger.error(f"getCandleData failed: {msg} | token={symbol_token}")
+                logger.error(f"getCandleData failed for {symbol_token} on {exchange}: {msg}")
                 return
 
             candles = candle_response.get('data', [])
             if not candles:
-                logger.info(f"No candles returned for {symbol_token}")
+                logger.info(f"No candles returned for {symbol_token} on {exchange}")
                 return
 
             # Take last N candles (enough for indicators + buffer)
             candles = candles[-120:]   # ~30 hours of 15-min candles
 
             if len(candles) < 50:
-                logger.info(f"Not enough candles ({len(candles)}) for {symbol_token} → skipping indicators")
+                logger.info(f"Not enough candles ({len(candles)}) for {symbol_token} on {exchange} → skipping indicators")
                 return
 
             closes = [float(c[4]) for c in candles]
@@ -235,7 +278,7 @@ class MarketConsumer(WebsocketConsumer):
 
             # Log strategy outcome (very useful for debugging)
             logger.info(
-                f"[STRATEGY] {symbol_name} | Side={current_side} | "
+                f"[STRATEGY] {symbol_name} ({exchange}) | Side={current_side} | "
                 f"ADX signal={adx_signal.get('action') if adx_signal else 'None'} | "
                 f"MACD signal={macd_signal.get('action') if macd_signal else 'None'}"
             )
@@ -251,6 +294,7 @@ class MarketConsumer(WebsocketConsumer):
                 "status": "live_indicators_update",
                 "symboltoken": symbol_token,
                 "symbol": symbol_name,
+                "exchange": exchange,
                 "latest_close": round(latest_close, 2) if latest_close is not None else None,
                 "timestamp": now.isoformat(),
                 "rsi_14": round(rsi, 2) if rsi is not None else None,
@@ -270,10 +314,10 @@ class MarketConsumer(WebsocketConsumer):
             }
 
             self.send(json.dumps(payload))
-            logger.debug(f"[IND UPDATE SENT] {symbol_name}")
+            logger.debug(f"[IND UPDATE SENT] {symbol_name} ({exchange})")
 
         except Exception as e:
-            logger.error(f"Live indicators processing failed for {symbol_token}: {e}", exc_info=True)
+            logger.error(f"Live indicators processing failed for {symbol_token} on {exchange}: {e}", exc_info=True)
     
     def start_strategy_monitor(self):
         if hasattr(self, '_timeloop_started') and self._timeloop_started:
@@ -327,6 +371,8 @@ class MarketConsumer(WebsocketConsumer):
                         if exchange_type not in self.subscribed_tokens or token not in self.subscribed_tokens[exchange_type]:
                             tokens.append(token)
                         new_token_symbol_map[token] = ts
+                        # Store exchange mapping
+                        self.token_exchange_map[token] = exchange
                         found = True
                     break
             if not found:
@@ -410,6 +456,8 @@ class MarketConsumer(WebsocketConsumer):
             for token in tokens:
                 if token in self.token_symbol_map:
                     del self.token_symbol_map[token]
+                if token in self.token_exchange_map:
+                    del self.token_exchange_map[token]
 
             self.send(json.dumps({"status": "unsubscribed", "tradingsymbols": tradingsymbols}))
 
@@ -580,6 +628,13 @@ class MarketConsumer(WebsocketConsumer):
             if not all([symbol_token, from_date, to_date]):
                 raise ValueError("symboltoken, from_date, to_date are required")
 
+            # If exchange not provided, try to detect it
+            if exchange == "NSE" and hasattr(self, 'token_exchange_map'):
+                detected_exchange = self.token_exchange_map.get(symbol_token)
+                if detected_exchange:
+                    exchange = detected_exchange
+                    logger.info(f"Auto-detected exchange for token {symbol_token}: {exchange}")
+
             historic_params = {
                 "exchange": exchange,
                 "symboltoken": symbol_token,
@@ -617,6 +672,7 @@ class MarketConsumer(WebsocketConsumer):
                 response = {
                     "status": "historical_data_with_indicators",
                     "symboltoken": symbol_token,
+                    "exchange": exchange,
                     "interval": interval,
                     "num_candles": len(candles),
                     "latest_close": round(closes[-1], 2) if closes else None,
@@ -694,7 +750,7 @@ class MarketConsumer(WebsocketConsumer):
                 self.token_to_symbol.get(symbol_token) or
                 symbol_token   # worst case fallback to token
             )
-            exchange = "NSE"
+            exchange = self.get_exchange_for_token(symbol_token)
 
             # Calculate target & stoploss (example logic)
             risk_reward = 1.5
@@ -724,7 +780,7 @@ class MarketConsumer(WebsocketConsumer):
                 quantity    = quantity,
             )
 
-            logger.info(f"Opened {side} {symbol_name} @ {entry_price:.2f} | "
+            logger.info(f"Opened {side} {symbol_name} ({exchange}) @ {entry_price:.2f} | "
                         f"Lots={lots} | Qty={quantity} | "
                         f"Target={target:.2f} | SL={stoploss:.2f}")
 
@@ -733,6 +789,7 @@ class MarketConsumer(WebsocketConsumer):
                 "status": "position_opened",
                 "token": symbol_token,
                 "symbol": symbol_name,
+                "exchange": exchange,
                 "side": side,
                 "entry_price": entry_price,
                 "target": round(target, 2),
@@ -773,6 +830,7 @@ class MarketConsumer(WebsocketConsumer):
 
             logger.info(
                 f"Position CLOSED | Token={symbol_token} | "
+                f"Exchange={position.exchange} | "
                 f"Exit price={exit_price:.2f} | "
                 f"Exit time={position.exit_datetime} | "
                 f"Qty={position.quantity} | MTM={position.mtm:.2f} | Reason={exit_reason}"
@@ -783,6 +841,7 @@ class MarketConsumer(WebsocketConsumer):
                 "status": "position_closed",
                 "token": symbol_token,
                 "symbol": symbol_name,
+                "exchange": position.exchange,
                 "exit_price": round(exit_price, 2),
                 "exit_datetime": position.exit_datetime.isoformat(),
                 "pnl": position.mtm,
@@ -798,6 +857,7 @@ class MarketConsumer(WebsocketConsumer):
     
     def handle_strategy_signal(self, symbol_token, signal, latest_close=None):
         symbol_name = self.token_symbol_map.get(symbol_token, symbol_token)
+        exchange = self.get_exchange_for_token(symbol_token)
         open_pos = self.get_open_position_for_token(symbol_token)
 
         if not signal:
@@ -805,6 +865,7 @@ class MarketConsumer(WebsocketConsumer):
                 "status": "no_signal",
                 "symboltoken": symbol_token,
                 "symbol": symbol_name,
+                "exchange": exchange,
                 "current_position": {
                     "status": "OPEN" if open_pos else "NONE"
                 }
@@ -833,6 +894,7 @@ class MarketConsumer(WebsocketConsumer):
                 self.send(json.dumps({
                     "status": "position_opened",
                     "symbol": symbol_name,
+                    "exchange": exchange,
                     "token": symbol_token,
                     "side": side,
                     "entry_price": price,
@@ -848,6 +910,7 @@ class MarketConsumer(WebsocketConsumer):
                 self.send(json.dumps({
                     "status": "position_closed",
                     "symbol": symbol_name,
+                    "exchange": exchange,
                     "token": symbol_token,
                     "exit_price": price,
                     "pnl": closed_pos.mtm,
